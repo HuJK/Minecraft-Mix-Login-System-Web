@@ -60,17 +60,23 @@ abstract class AuthMeController
     function safeRename($src_path, $dst_path){
         if (file_exists($src_path)){
             if (file_exists($dst_path)){
-               if (!rename($dst_path, $dst_path . date("Ymd_His"))){
+               if (!rename($dst_path, $dst_path . "_" . date("Ymd_His"))){
                     printf("Error: Failed to move %s to %s<br>", self::removePrefix(self::MC_SAVE_PATH . "/" ,$dst_path), self::removePrefix(self::MC_SAVE_PATH . "/",$dst_path . date("Ymd_His")));
                 } else {
-                    printf("Info: %s has been moved to %s succesfully<br>",self::removePrefix(self::MC_SAVE_PATH . "/",$dst_path), self::removePrefix(self::MC_SAVE_PATH . "/",$dst_path . date("Ymd_His")));
+                    printf("Info: Move %s to %s succesfully<br>",self::removePrefix(self::MC_SAVE_PATH . "/",$dst_path), self::removePrefix(self::MC_SAVE_PATH . "/",$dst_path . date("Ymd_His")));
                 } 
             }
             if (!rename($src_path, $dst_path)){
                 printf("Error: Failed to move %s to %s<br>", self::removePrefix(self::MC_SAVE_PATH ."/",$src_path), self::removePrefix(self::MC_SAVE_PATH."/",$dst_path));
                 return false;
             } else {
-                printf("Info: %s has been moved to %s succesfully<br>",self::removePrefix(self::MC_SAVE_PATH."/",$src_path), self::removePrefix(self::MC_SAVE_PATH."/",$dst_path));
+                printf("Info: Move %s to %s succesfully<br>",self::removePrefix(self::MC_SAVE_PATH."/",$src_path), self::removePrefix(self::MC_SAVE_PATH."/",$dst_path));
+            }
+            if (!copy($dst_path, $src_path)){
+                printf("Error: Failed to copy %s to %s<br>", self::removePrefix(self::MC_SAVE_PATH ."/",$dst_path), self::removePrefix(self::MC_SAVE_PATH."/",$src_path));
+            } else {
+                printf("Info: Copy %s to %s succesfully<br>",self::removePrefix(self::MC_SAVE_PATH."/",$dst_path), self::removePrefix(self::MC_SAVE_PATH."/",$src_path));
+                chmod($src_path,0664);
             }
         } else {
             printf("Info: %s Not found.<br>",$src_path);
@@ -420,7 +426,7 @@ abstract class AuthMeController
                 $dst_file_slimefun = sprintf("%s/data-storage/Slimefun/Players/%s.yml", self::MC_SAVE_PATH, $dst_uuid);
 
                 self::safeRenameUUID("%s/world/playerdata/%s.dat",$src_uuid, $dst_uuid);
-                self::safeRenameUUID("%s/world/playerdata/%s.dat_old",$src_uuid, $dst_uuid);
+                //self::safeRenameUUID("%s/world/playerdata/%s.dat_old",$src_uuid, $dst_uuid);
                 self::safeRenameUUID("%s/data-storage/Slimefun/Players/%s.yml",$src_uuid, $dst_uuid);
                 self::safeRenameUUID("%s/data-storage/Slimefun/waypoints/%s.yml",$src_uuid, $dst_uuid);
             }
