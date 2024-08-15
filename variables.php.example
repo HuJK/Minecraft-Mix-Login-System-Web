@@ -1,0 +1,14 @@
+<?php
+class CONSTANTS {
+    public const DB_URL = "localhost";
+    public const DB_NAME = 'mc_authdb';
+    public const DB_USER = "dbusername";
+    public const DB_PASS = "dbpassword";
+    public const MC_SAVE_PATH = '/mnt/mc_data/mc_slimefun_1204/mc_server';
+    public const MOJANG_API_USER = "https://api.mojang.com/users/profiles/minecraft/";
+    public const AUTHME_TABLE = 'authme';
+    public const FastLogin_TABLE = 'premium';
+    public const LinkedPlayer_TABLE = "LinkedPlayers";
+    public const AUTHME_INVITE_TABLE = 'invite';
+}
+?>
