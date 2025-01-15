@@ -51,7 +51,7 @@
        const uuidJava = document.getElementsByName('uuid_java')[0];
 
        // Only make the API call if fastLogin is checked, login is not successful, and username_java is not empty
-         const url = `https://corsproxy.io/?https://api.mojang.com/users/profiles/minecraft/${usernameJava.value}`;
+         const url = `https://corsproxy.io/?url=https://api.mojang.com/users/profiles/minecraft/${usernameJava.value}`;
 
          fetch(url)
            .then(response => {

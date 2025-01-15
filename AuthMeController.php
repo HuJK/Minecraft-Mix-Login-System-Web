@@ -424,9 +424,9 @@ abstract class AuthMeController
                 $dst_file_playerdata = sprintf("%s/world/playerdata/%s.dat", self::MC_SAVE_PATH, $dst_uuid);
                 $src_file_slimefun = sprintf("%s/data-storage/Slimefun/Players/%s.yml", self::MC_SAVE_PATH, $src_uuid);
                 $dst_file_slimefun = sprintf("%s/data-storage/Slimefun/Players/%s.yml", self::MC_SAVE_PATH, $dst_uuid);
-
+                exec("sudo /var/www/authme/setpermission.sh");
                 self::safeRenameUUID("%s/world/playerdata/%s.dat",$src_uuid, $dst_uuid);
-                //self::safeRenameUUID("%s/world/playerdata/%s.dat_old",$src_uuid, $dst_uuid);
+                self::safeRenameUUID("%s/world/playerdata/%s.dat_old",$src_uuid, $dst_uuid);
                 self::safeRenameUUID("%s/data-storage/Slimefun/Players/%s.yml",$src_uuid, $dst_uuid);
                 self::safeRenameUUID("%s/data-storage/Slimefun/waypoints/%s.yml",$src_uuid, $dst_uuid);
             }
